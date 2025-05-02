@@ -139,7 +139,7 @@ def create_eval():
         }
     
     try:
-        response = client.evaluations.create_eval(**eval_task)
+        response = client.evals.create(**eval_task)
         eval_id = response.id
         
         # Print all returned fields
@@ -160,40 +160,30 @@ def create_eval():
         print(f"Error creating eval task: {str(e)}")
         return None
 
-def upload_test_data(eval_id=None):
+def upload_test_data():
     """
-    Upload the test data from evals.txt to the eval task
+    Upload the test data from evals.jsonl to the eval task
     """
-    if eval_id is None:
-        ids = load_ids()
-        eval_id = ids.get("eval_id")
-        if not eval_id:
-            print("No eval ID provided or found in saved IDs. Please create an eval first.")
-            return None
     
-    print(f"Uploading test data for eval ID: {eval_id}...")
+    print(f"Uploading test data ...")
     
     try:
-        # Read the JSONL file
-        with open("evals.txt", "r") as f:
-            eval_data = f.read()
-        
         # Upload the data to the eval
-        response = client.evaluations.upload_data(
-            eval_id=eval_id,
-            file_data=eval_data
+        response = client.files.create(
+            file=open("evals10.jsonl", "rb"),
+            purpose="evals"
         )
+
         data_id = response.id
         
         # Print all returned fields
         print("\nData uploaded successfully:")
         print(f"Data ID: {data_id}")
-        print(f"Eval ID: {response.eval_id}")
         print(f"Status: {response.status}")
         print(f"Created at: {response.created_at}")
         
         # Save the ID for later use
-        ids = load_ids()
+        ids = {}
         ids["data_id"] = data_id
         save_ids(ids)
         
@@ -415,15 +405,15 @@ def run_all():
     Run all steps in sequence
     """
     print("Starting complete OpenAI Evaluation Process...")
-    
-    # Step 1: Create the eval task
+
+    # Step 1: Upload the test data
+    data_id = upload_test_data()
+    if not data_id:
+        return
+
+    # Step 2: Create the eval task
     eval_id = create_eval()
     if not eval_id:
-        return
-    
-    # Step 2: Upload the test data
-    data_id = upload_test_data(eval_id)
-    if not data_id:
         return
     
     # Step 3: Create and start the eval run
@@ -447,8 +437,8 @@ def main():
     parser = argparse.ArgumentParser(description='OpenAI Evaluation Process')
     
     # Add arguments for each step
-    parser.add_argument('--create', action='store_true', help='Create an eval task')
     parser.add_argument('--upload', action='store_true', help='Upload test data')
+    parser.add_argument('--create', action='store_true', help='Create an eval task')
     parser.add_argument('--run', action='store_true', help='Create and start an eval run')
     parser.add_argument('--check', action='store_true', help='Check the status of a run')
     parser.add_argument('--analyze', action='store_true', help='Analyze the results of a run')
@@ -470,11 +460,11 @@ def main():
     if args.all:
         run_all()
     else:
+        if args.upload:
+            upload_test_data()
+
         if args.create:
             create_eval()
-        
-        if args.upload:
-            upload_test_data(args.eval_id)
         
         if args.run:
             create_eval_run(args.eval_id, args.data_id)
