@@ -111,32 +111,32 @@ def create_eval():
     
     # Define the eval task according to the OpenAI API reference
     eval_task = {
-            "name": "Hospitality Intent Classification",
-            "data_source_config": {
-                "type": "custom",
-                "metadata": {
-                    "usecase": "chatbot"
+        "name": "Hospitality Intent Classification",
+        "metadata": {
+            "usecase": "chatbot"
+        },
+        "data_source_config": {
+            "type": "custom",
+            "item_schema": {
+                "type": "object",
+                "properties": {
+                    "input_text": {"type": "string"},
+                    "correct_label": {"type": "string"}
                 },
-                "item_schema": {
-                    "type": "object",
-                    "properties": {
-                        "input_text": { "type": "string" },
-                        "correct_label": { "type": "string" }
-                    },
-                    "required": ["input_text", "correct_label"]
-                },
-                "include_sample_schema": "true"
+                "required": ["input_text", "correct_label"]
             },
-            "testing_criteria": [
-                {
-                    "type": "string_check",
-                    "name": "Match output to human label",
-                    "input": "{{ sample.output_text }}",
-                    "operation": "eq",
-                    "reference": "{{ item.correct_label }}"
-                }
-            ]
-        }
+            "include_sample_schema": True
+        },
+        "testing_criteria": [
+            {
+                "type": "string_check",
+                "name": "Match output to human label",
+                "input": "{{ sample.output_text }}",
+                "operation": "eq",
+                "reference": "{{ item.correct_label }}"
+            }
+        ]
+    }
     
     try:
         response = client.evals.create(**eval_task)
@@ -146,8 +146,6 @@ def create_eval():
         print("\nEval created successfully:")
         print(f"ID: {eval_id}")
         print(f"Name: {response.name}")
-        print(f"Type: {response.type}")
-        print(f"Status: {response.status}")
         print(f"Created at: {response.created_at}")
         
         # Save the ID for later use
