@@ -109,36 +109,34 @@ def create_eval():
     """
     print("Creating eval task...")
     
-    # Define the eval task according to the API reference
+    # Define the eval task according to the OpenAI API reference
     eval_task = {
-        "name": "Hospitality Intent Classification",
-        "description": "Evaluate the model's ability to classify hospitality customer intents",
-        "data_source": {
-            "type": "jsonl",
+            "name": "Hospitality Intent Classification",
             "data_source_config": {
+                "type": "custom",
+                "metadata": {
+                    "usecase": "chatbot"
+                },
                 "item_schema": {
                     "type": "object",
                     "properties": {
-                        "item": {
-                            "type": "object",
-                            "properties": {
-                                "input_text": {
-                                    "type": "string",
-                                    "description": "The customer query or message"
-                                },
-                                "correct_label": {
-                                    "type": "string",
-                                    "description": "The correct intention number (1-40)"
-                                }
-                            },
-                            "required": ["input_text", "correct_label"]
-                        }
+                        "input_text": { "type": "string" },
+                        "correct_label": { "type": "string" }
                     },
-                    "required": ["item"]
+                    "required": ["input_text", "correct_label"]
+                },
+                "include_sample_schema": "true"
+            },
+            "testing_criteria": [
+                {
+                    "type": "string_check",
+                    "name": "Match output to human label",
+                    "input": "{{ sample.output_text }}",
+                    "operation": "eq",
+                    "reference": "{{ item.correct_label }}"
                 }
-            }
+            ]
         }
-    }
     
     try:
         response = client.evaluations.create_eval(**eval_task)
@@ -148,7 +146,7 @@ def create_eval():
         print("\nEval created successfully:")
         print(f"ID: {eval_id}")
         print(f"Name: {response.name}")
-        print(f"Description: {response.description}")
+        print(f"Type: {response.type}")
         print(f"Status: {response.status}")
         print(f"Created at: {response.created_at}")
         
@@ -220,25 +218,25 @@ def create_eval_run(eval_id=None, data_id=None):
     
     print(f"Creating eval run for eval ID: {eval_id} and data ID: {data_id}...")
     
-    # Define the eval run configuration according to the API reference
+    # Define the eval run configuration according to the OpenAI API reference
     eval_run_config = {
         "eval_id": eval_id,
         "data_id": data_id,
         "model": "gpt-4o-mini",
-        "max_concurrency": 5,
-        "template": {
-            "input_messages": [
-                {
-                    "role": "system",
-                    "content": SYSTEM_PROMPT
-                },
-                {
-                    "role": "user",
-                    "content": "{{item.input_text}}",
-                    "type": "completions" 
-                }
-            ],
-            "expected_output": "{{item.correct_label}}"
+        "evaluation_config": {
+            "prompt_template": {
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": SYSTEM_PROMPT
+                    },
+                    {
+                        "role": "user",
+                        "content": "{{item.input_text}}"
+                    }
+                ]
+            },
+            "expected_answer_template": "{{item.correct_label}}"
         }
     }
     
@@ -284,14 +282,15 @@ def check_run_status(run_id=None):
             status = response.status
             print(f"Run status: {status}")
             
-            if status in ["completed", "failed"]:
+            if status in ["completed", "failed", "cancelled"]:
                 # Print details when status changes to completed or failed
                 print("\nRun details:")
                 print(f"Run ID: {response.id}")
                 print(f"Status: {response.status}")
                 print(f"Started at: {response.started_at}")
                 print(f"Completed at: {response.completed_at}")
-                print(f"Error: {response.error if hasattr(response, 'error') else 'None'}")
+                if hasattr(response, 'error'):
+                    print(f"Error: {response.error}")
                 return status
             
             # Wait for 10 seconds before checking again
@@ -371,7 +370,7 @@ def analyze_results(run_id=None):
             # Store the record details
             processed_record = {
                 "id": record.id,
-                "input_text": record.input_messages[1].content,
+                "input_text": record.input_messages[1].content if len(record.input_messages) > 1 else "",
                 "expected_intention": expected,
                 "model_response": actual_response,
                 "extracted_intention": extracted_intention,
