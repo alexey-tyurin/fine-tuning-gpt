@@ -449,6 +449,25 @@ def main():
     
     args = parser.parse_args()
     
+    # Load saved IDs to use as defaults
+    saved_ids = load_ids()
+    
+    # Use command line args if provided, otherwise use saved IDs
+    eval_id = args.eval_id if args.eval_id is not None else saved_ids.get("eval_id")
+    data_id = args.data_id if args.data_id is not None else saved_ids.get("data_id")
+    run_id = args.run_id if args.run_id is not None else saved_ids.get("run_id")
+    
+    # If IDs are available, print them for user reference
+    if any([eval_id, data_id, run_id]):
+        print("\nUsing the following IDs:")
+        if eval_id:
+            print(f"Eval ID: {eval_id}")
+        if data_id:
+            print(f"Data ID: {data_id}")
+        if run_id:
+            print(f"Run ID: {run_id}")
+        print()
+    
     # If no arguments provided, show help
     if not any([args.create, args.upload, args.run, args.check, args.analyze, args.all]):
         parser.print_help()
@@ -465,13 +484,13 @@ def main():
             create_eval()
         
         if args.run:
-            create_eval_run(args.eval_id, args.data_id)
+            create_eval_run(eval_id, data_id)
         
         if args.check:
-            check_run_status(args.run_id)
+            check_run_status(run_id)
         
         if args.analyze:
-            analyze_results(args.run_id)
+            analyze_results(run_id)
 
 if __name__ == "__main__":
     main() 
