@@ -2,16 +2,6 @@
 # Python lists of vague messages and their correct mappings
 
 vague_messages = [
-    "Just wondering what options we might have for our final morning at your property, since we have a bit of a scheduling conflict with our transportation arrangements.",
-    "Could you let me know what the property offers for special occasions? We're celebrating something important during our stay and I'd like to make it memorable.",
-    "I've been trying to figure out the best way to plan our day when we first arrive. Our flight gets in pretty early and I'm concerned about timing.",
-    "What's the process for handling our belongings on departure day? We have some time to kill between when we need to leave the room and our actual departure.",
-    "I'm trying to plan ahead for our family trip. My daughter has some special requirements that I wanted to make sure we can accommodate properly.",
-    "I'm looking at the information for our upcoming stay. There's a small issue with the travel plans that might affect our arrangements with you.",
-    "I was wondering about the different options for our morning meal during our stay. We have some timing constraints I wanted to ask about.",
-    "I'd like to understand what preparations we need to make before our arrival. There are a few details I'm not clear on from the website.",
-    "I need to figure out the best approach for our group's arrival. We'll have several people coming at different times with varying needs.",
-    "Could you provide some clarity on the documentation we received? There are a few points that seem inconsistent with what we expected.",
     "We'd like to know if there's a way to make our anniversary extra special without a lot of fuss.",
     "I'm curious about how we can manage our final day given our unusual departure situation.",
     "Our plans changed unexpectedly and I'm trying to figure out if we need to adjust anything with you.",
@@ -205,16 +195,6 @@ vague_messages = [
 ]
 
 correct_mappings = [
-    7,  # Request late check-out
-    21, # Ask about local attractions or tours
-    6,  # Request early check-in
-    10, # Request luggage assistance
-    13, # Request menu or dietary information
-    3,  # Modify reservation
-    14, # Ask for breakfast hours or availability
-    8,  # Check-in online
-    2,  # Make a reservation / Book a room
-    5,  # Check reservation status
     20, # Request in-room amenities
     7,  # Request late check-out
     3,  # Modify reservation
