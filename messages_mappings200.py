@@ -191,7 +191,17 @@ vague_messages = [
     "I need to know more about how your property ensures guest privacy and security.",
     "Could you share some information about the daily operations that might affect guests?",
     "I'm wondering about the preparations we should make before our departure.",
-    "What's the best way to address any issues that might arise unexpectedly during our stay?"
+    "What's the best way to address any issues that might arise unexpectedly during our stay?",
+    "I need some assistance with my morning plans tomorrow. The timing might be tricky and I'm not sure how everything will work out with what I've scheduled.",
+    "I have a situation that might need special attention. My elderly parent will be joining us and might need extra assistance during our visit.",
+    "There's something different about our arrangements compared to what we booked. I noticed some inconsistencies when reviewing the confirmation.",
+    "I'm wondering about the options we have for managing our things on the last day. We have activities planned before we leave.",
+    "I noticed the information seems different from other places we've stayed. Could you explain how certain things work here?",
+    "We had some challenges during our last stay that I wanted to discuss. I think it would be helpful if we could talk about it properly.",
+    "I've been trying to find information about specific arrangements for our upcoming event. The details seem to be missing from the confirmation.",
+    "I need to understand the requirements for our departure. There are some timing considerations that might affect our plans.",
+    "I'm concerned about our schedule flexibility when we arrive. Our group has different preferences that might need accommodation.",
+    "I notice the final documentation doesn't match my expectations. There are discrepancies that I'd like to address."
 ]
 
 correct_mappings = [
