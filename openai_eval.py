@@ -3,6 +3,7 @@ import json
 import time
 import argparse
 from openai import OpenAI
+from datetime import datetime
 
 # Initialize the OpenAI client
 api_key = os.environ.get("OPENAI_API_KEY")
@@ -22,10 +23,10 @@ SYSTEM_PROMPT = """You are an advanced hospitality chatbot for a premium hotel c
    - Consider context clues and hospitality-specific terminology
    - Identify the most urgent or primary need if multiple are present
    - Focus on what the user wants to accomplish, not just what they're asking about
+   - Identify the intention number and name (e.g., "INTENTION: #16 - Request room cleaning")
 
 3. RESPONSE FORMAT:
-   - First identify the intention number and name (e.g., "INTENTION: #16 - Request room cleaning")
-   - Then explain your reasoning in 1-2 sentences
+   - Respond with only intention number (e.g., 16)
 
 4. HANDLING AMBIGUITY:
    - If a message contains multiple possible intentions, prioritize based on:
@@ -209,7 +210,7 @@ def create_eval_run(eval_id=None, data_id=None):
     # Define the eval run configuration according to the OpenAI API reference
     eval_run_config = {
         "eval_id": eval_id,
-        "name": "gpt-4o-mini 10",
+        "name": "gpt-4o-mini 10 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "data_source": {
             "type": "completions",
             "model": "gpt-4o-mini",
@@ -243,8 +244,8 @@ def create_eval_run(eval_id=None, data_id=None):
         # Print all returned fields
         print("\nEval run created successfully:")
         print(f"Run ID: {run_id}")
-        print(f"Eval ID: {response.eval_id}")
-        print(f"Data ID: {response.data_id}")
+        print(f"Eval ID: {eval_id}")
+        print(f"Data ID: {data_id}")
         print(f"Model: {response.model}")
         print(f"Status: {response.status}")
         print(f"Created at: {response.created_at}")
