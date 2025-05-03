@@ -12,16 +12,16 @@ vague_messages = [
 ]
 
 correct_mappings = [
-    "Ask for breakfast hours or availability",
-    "Request luggage assistance",
-    "Modify reservation",
-    "Request late check-out",
-    "Ask for help using the chatbot",
-    "Request human support or live agent",
-    "Book a table at a restaurant",
-    "Request late check-out",
-    "Request early check-in",
-    "Query charges on the bill"
+    14, # 14: Ask for breakfast hours or availability
+    10, # 10: Request luggage assistance
+    3,  # 3: Modify reservation
+    7,  # 7: Request late check-out
+    40, # 40: Ask for help using the chatbot
+    39, # 39: Request human support or live agent
+    12, # 12: Book a table at a restaurant
+    7,  # 7: Request late check-out
+    6,  # 6: Request early check-in
+    27  # 27: Query charges on the bill
 ]
 
 intention_names = {
