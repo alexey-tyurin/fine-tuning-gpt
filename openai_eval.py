@@ -12,7 +12,7 @@ if not api_key:
 
 client = OpenAI(api_key=api_key)
 
-# System prompt from test_intent_4o-mini_200.py
+# System prompt from test_intent_4o-mini_200.py with updated response format for evals
 SYSTEM_PROMPT = """You are an advanced hospitality chatbot for a premium hotel chain. Your primary function is to analyze user messages and accurately identify their main intention from a predefined list of 40 possible intentions. Follow these guidelines:
 
 1. CORE FUNCTION: For each user message, identify exactly ONE primary intention from the list of 40 intentions provided below.
@@ -114,7 +114,8 @@ def create_eval():
     eval_task = {
         "name": "Hospitality Intent Classification",
         "metadata": {
-            "usecase": "chatbot"
+            "usecase": "chatbot",
+            "data": "evals100"
         },
         "data_source_config": {
             "type": "custom",
@@ -161,7 +162,7 @@ def create_eval():
 
 def upload_test_data():
     """
-    Upload the test data from evals.jsonl to the eval task
+    Upload the test data from evals100.jsonl to the eval task
     """
     
     print(f"Uploading test data ...")
@@ -169,7 +170,7 @@ def upload_test_data():
     try:
         # Upload the data to the eval
         response = client.files.create(
-            file=open("evals10.jsonl", "rb"),
+            file=open("evals100.jsonl", "rb"),
             purpose="evals"
         )
 
@@ -210,10 +211,14 @@ def create_eval_run(eval_id=None, data_id=None):
     # Define the eval run configuration according to the OpenAI API reference
     eval_run_config = {
         "eval_id": eval_id,
-        "name": "gpt-4o-mini 10 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "name": "gpt-4o-mini 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        # "name": "gpt-3.5-turbo 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        # "name": "gpt-4.1 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "data_source": {
             "type": "completions",
             "model": "gpt-4o-mini",
+            # "model": "gpt-3.5-turbo",
+            # "model": "gpt-4.1",
             "input_messages": {
                 "type": "template",
                 "template": [
