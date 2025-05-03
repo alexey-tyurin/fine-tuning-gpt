@@ -209,13 +209,15 @@ def create_eval_run(eval_id=None, data_id=None):
     # Define the eval run configuration according to the OpenAI API reference
     eval_run_config = {
         "eval_id": eval_id,
-        "data_id": data_id,
-        "model": "gpt-4o-mini",
-        "evaluation_config": {
-            "prompt_template": {
-                "messages": [
+        "name": "gpt-4o-mini 10",
+        "data_source": {
+            "type": "completions",
+            "model": "gpt-4o-mini",
+            "input_messages": {
+                "type": "template",
+                "template": [
                     {
-                        "role": "system",
+                        "role": "developer",
                         "content": SYSTEM_PROMPT
                     },
                     {
@@ -224,12 +226,18 @@ def create_eval_run(eval_id=None, data_id=None):
                     }
                 ]
             },
-            "expected_answer_template": "{{item.correct_label}}"
+            "sampling_params": {
+                "seed": 42
+            },
+            "source": {
+                "type": "file_id",
+                "id": data_id
+            }
         }
     }
     
     try:
-        response = client.evaluations.create_run(**eval_run_config)
+        response = client.evals.runs.create(**eval_run_config)
         run_id = response.id
         
         # Print all returned fields
