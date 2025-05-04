@@ -86,7 +86,8 @@ def create_fine_tuning_job(file_id=None):
                 "type": "supervised",
                 "supervised": {
                     "hyperparameters": {
-                        "n_epochs": 1
+                        "n_epochs": 1,
+                        "batch_size": 3
                     },
                 },
             },
