@@ -49,7 +49,6 @@ def upload_training_file():
         # Print all returned fields
         print("\nFile uploaded successfully:")
         print(f"File ID: {file_id}")
-        print(f"Filename: {response.filename}")
         print(f"Status: {response.status}")
         print(f"Created at: {response.created_at}")
         
@@ -217,43 +216,59 @@ def analyze_results(job_id=None):
         # Test the fine-tuned model on a few examples
         print("\nTesting fine-tuned model on examples...")
         
-        # Load the test examples from tests10.jsonl
-        with open("tests10.jsonl", "r") as f:
-            test_examples = [json.loads(line) for line in f]
-        
-        # Select a few examples for testing
-        test_sample = test_examples[:3]  # Using first 3 examples
-        
-        # Test each example with the fine-tuned model
-        for idx, example in enumerate(test_sample):
-            input_text = example["item"]["input_text"]
-            correct_label = example["item"]["correct_label"]
+        # Load test examples from tests10.jsonl
+        try:
+            with open("tests10.jsonl", "r") as f:
+                test_examples = [json.loads(line) for line in f]
             
-            print(f"\nExample {idx+1}:")
-            print(f"Input: {input_text}")
-            print(f"Expected label: {correct_label}")
+            # Select a few examples for testing
+            test_sample = test_examples[:3]  # Using first 3 examples
             
-            # Query the fine-tuned model
-            try:
-                completion = client.chat.completions.create(
-                    model=fine_tuned_model,
-                    messages=[
-                        {"role": "system", "content": "You are a hospitality chatbot. Identify the guest's intention from the input text and respond only with the intention number."},
-                        {"role": "user", "content": input_text}
-                    ],
-                    max_tokens=10
-                )
+            # Test each example with the fine-tuned model
+            correct_count = 0
+            total_count = 0
+            
+            for idx, example in enumerate(test_sample):
+                # Extract messages from the example
+                messages = example["messages"]
+                system_message = messages[0]["content"]
+                user_message = messages[1]["content"]
+                expected_label = messages[2]["content"]
                 
-                # Get the model's prediction
-                prediction = completion.choices[0].message.content.strip()
-                print(f"Model prediction: {prediction}")
+                total_count += 1
                 
-                # Check if prediction matches expected label
-                is_correct = prediction == correct_label
-                print(f"Correct: {is_correct}")
+                print(f"\nExample {idx+1}:")
+                print(f"Input: {user_message}")
+                print(f"Expected label: {expected_label}")
                 
-            except Exception as e:
-                print(f"Error testing example: {str(e)}")
+                # Query the fine-tuned model
+                try:
+                    completion = client.chat.completions.create(
+                        model=fine_tuned_model,
+                        messages=[
+                            {"role": "system", "content": system_message},
+                            {"role": "user", "content": user_message}
+                        ],
+                        max_tokens=10
+                    )
+                    
+                    # Get the model's prediction
+                    prediction = completion.choices[0].message.content.strip()
+                    print(f"Model prediction: {prediction}")
+                    
+                    # Check if prediction matches expected label
+                    is_correct = prediction == expected_label
+                    if is_correct:
+                        correct_count += 1
+                    print(f"Correct: {is_correct}")
+                    
+                except Exception as e:
+                    print(f"Error testing example: {str(e)}")
+            
+            print(f"\nTesting accuracy: {correct_count}/{total_count} ({correct_count/total_count*100 if total_count > 0 else 0:.2f}%)")
+            
+        except Exception as e:
+            print(f"Error loading or testing examples: {str(e)}")
         
         # Save the analysis results to a file
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -281,15 +296,17 @@ def analyze_results(job_id=None):
         return None
 
 def run_all():
-    """Run all steps of the fine-tuning process"""
+    """
+    Run all steps in sequence
+    """
     print("Starting complete fine-tuning process...")
-    
+
     # Step 1: Upload training file
     file_id = upload_training_file()
     if not file_id:
         print("Failed to upload training file. Aborting.")
         return
-    
+
     # Step 2: Create fine-tuning job
     job_id = create_fine_tuning_job(file_id)
     if not job_id:
@@ -328,25 +345,44 @@ def run_all():
     print("Fine-tuning process completed.")
 
 def main():
-    parser = argparse.ArgumentParser(description='OpenAI Fine-Tuning Tool')
-    parser.add_argument('action', choices=['upload', 'create', 'status', 'analyze', 'all'],
-                      help='Action to perform: upload (training file), create (fine-tuning job), ' +
-                           'status (check job status), analyze (results), or all (run all steps)')
+    """
+    Main function to parse arguments and run the appropriate step
+    """
+    parser = argparse.ArgumentParser(description='OpenAI Fine-Tuning Process')
+    
+    # Add arguments for each step
+    parser.add_argument('--upload', action='store_true', help='Upload training file')
+    parser.add_argument('--create', action='store_true', help='Create a fine-tuning job')
+    parser.add_argument('--status', action='store_true', help='Check the status of a fine-tuning job')
+    parser.add_argument('--analyze', action='store_true', help='Analyze the results of a fine-tuning job')
+    parser.add_argument('--all', action='store_true', help='Run all steps in sequence')
+    
+    # Add arguments for IDs
+    parser.add_argument('--file-id', type=str, help='File ID for operations that require it')
+    parser.add_argument('--job-id', type=str, help='Job ID for operations that require it')
     
     args = parser.parse_args()
     
-    if args.action == 'upload':
-        upload_training_file()
-    elif args.action == 'create':
-        create_fine_tuning_job()
-    elif args.action == 'status':
-        check_fine_tuning_status()
-    elif args.action == 'analyze':
-        analyze_results()
-    elif args.action == 'all':
+    # If no arguments provided, show help
+    if not any([args.upload, args.create, args.status, args.analyze, args.all]):
+        parser.print_help()
+        return
+    
+    # Run the appropriate step based on the arguments
+    if args.all:
         run_all()
     else:
-        print(f"Unknown action: {args.action}")
+        if args.upload:
+            upload_training_file()
+
+        if args.create:
+            create_fine_tuning_job(args.file_id)
+        
+        if args.status:
+            check_fine_tuning_status(args.job_id)
+        
+        if args.analyze:
+            analyze_results(args.job_id)
 
 if __name__ == "__main__":
     main() 
