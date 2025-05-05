@@ -211,13 +211,14 @@ def create_eval_run(eval_id=None, data_id=None):
     # Define the eval run configuration according to the OpenAI API reference
     eval_run_config = {
         "eval_id": eval_id,
-        "name": "FT-10 gpt-4o-mini 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "name": "FT-200 gpt-4o-mini 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         # "name": "gpt-4o-mini 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         # "name": "gpt-3.5-turbo 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         # "name": "gpt-4.1 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "data_source": {
             "type": "completions",
-            "model": "ft:gpt-4o-mini-2024-07-18:personal:sft:BTeGI2xn",
+            "model": "ft:gpt-4o-mini-2024-07-18:personal:sft200:BTekLgEc",
+            # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft:BTeGI2xn",
             # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft:BTe1oL7z",
             # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft:BTY4HMKv",
             # "model": "gpt-4o-mini",

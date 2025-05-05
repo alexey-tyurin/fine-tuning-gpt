@@ -394,7 +394,17 @@ correct_mappings = [
     24, # Ask about hotel policies
     32, # Ask about facility opening hours
     9,  # Check-out online
-    18  # Report an issue in the room
+    18,  # Report an issue in the room
+    14, # 14: Ask for breakfast hours or availability
+    10, # 10: Request luggage assistance
+    3,  # 3: Modify reservation
+    7,  # 7: Request late check-out
+    40, # 40: Ask for help using the chatbot
+    39, # 39: Request human support or live agent
+    12, # 12: Book a table at a restaurant
+    7,  # 7: Request late check-out
+    6,  # 6: Request early check-in
+    27  # 27: Query charges on the bill
 ]
 
 # Example of how to use these lists:

@@ -1,5 +1,7 @@
 import json
 
+from messages_mappings200 import vague_messages, correct_mappings
+
 # System prompt from openai_eval.py
 SYSTEM_PROMPT = """You are an advanced hospitality chatbot for a premium hotel chain. Your primary function is to analyze user messages and accurately identify their main intention from a predefined list of 40 possible intentions. Follow these guidelines:
 
@@ -73,35 +75,8 @@ LIST OF INTENTIONS:
 39. Request human support or live agent  
 40. Ask for help using the chatbot"""
 
-# Data from messages_mappings10.py
-vague_messages = [
-    "I need some assistance with my morning plans tomorrow. The timing might be tricky and I'm not sure how everything will work out with what I've scheduled.",
-    "I have a situation that might need special attention. My elderly parent will be joining us and might need extra assistance during our visit.",
-    "There's something different about our arrangements compared to what we booked. I noticed some inconsistencies when reviewing the confirmation.",
-    "I'm wondering about the options we have for managing our things on the last day. We have activities planned before we leave.",
-    "I noticed the information seems different from other places we've stayed. Could you explain how certain things work here?",
-    "We had some challenges during our last stay that I wanted to discuss. I think it would be helpful if we could talk about it properly.",
-    "I've been trying to find information about specific arrangements for our upcoming event. The details seem to be missing from the confirmation.",
-    "I need to understand the requirements for our departure. There are some timing considerations that might affect our plans.",
-    "I'm concerned about our schedule flexibility when we arrive. Our group has different preferences that might need accommodation.",
-    "I notice the final documentation doesn't match my expectations. There are discrepancies that I'd like to address."
-]
-
-correct_mappings = [
-    14, # Ask for breakfast hours or availability
-    10, # Request luggage assistance
-    3,  # Modify reservation
-    7,  # Request late check-out
-    40, # Ask for help using the chatbot
-    39, # Request human support or live agent
-    12, # Book a table at a restaurant
-    7,  # Request late check-out
-    6,  # Request early check-in
-    27  # Query charges on the bill
-]
-
 # Create the JSONL data
-with open('tests10.jsonl', 'w') as f:
+with open('tests200.jsonl', 'w') as f:
     for i in range(len(vague_messages)):
         example = {
             "messages": [
@@ -112,4 +87,4 @@ with open('tests10.jsonl', 'w') as f:
         }
         f.write(json.dumps(example) + '\n')
 
-print("Created tests10.jsonl with 10 examples in the correct format.") 
+print("Created tests200.jsonl with 200 examples in the correct format.")
