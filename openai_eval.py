@@ -217,7 +217,10 @@ def create_eval_run(eval_id=None, data_id=None):
         # "name": "gpt-4.1 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "data_source": {
             "type": "completions",
-            "model": "ft:gpt-4o-mini-2024-07-18:personal:sft200:BTekLgEc",
+            "model": "ft:gpt-4o-mini-2024-07-18:personal:sft200:BTfrZIAI",
+            # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft200:BTfZkUri",
+            # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft200:BTfHQPSh",
+            # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft200:BTekLgEc",
             # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft:BTeGI2xn",
             # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft:BTe1oL7z",
             # "model": "ft:gpt-4o-mini-2024-07-18:personal:sft:BTY4HMKv",

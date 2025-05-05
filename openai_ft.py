@@ -87,6 +87,10 @@ def create_fine_tuning_job(file_id=None):
                 "supervised": {
                     "hyperparameters": {
                         "n_epochs": 1,
+                        "learning_rate_multiplier": 0.3,
+                        # "learning_rate_multiplier": 0.005,
+                        # "learning_rate_multiplier": 0.02,
+                        "batch_size": "auto"
                         # "batch_size": 3
                     },
                 },
