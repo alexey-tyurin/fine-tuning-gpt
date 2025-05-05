@@ -87,10 +87,20 @@ def create_fine_tuning_job(file_id=None):
                 "supervised": {
                     "hyperparameters": {
                         "n_epochs": 1,
-                        "batch_size": 3
+                        # "batch_size": 3
                     },
                 },
             },
+            integrations=[
+                {
+                    "type": "wandb",
+                    "wandb": {
+                        "project": "fine_tuning",
+                        "tags": ["project:tag", "lineage"],
+                        "name": "FT-10 gpt-4o-mini 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    }
+                }
+            ],
             seed=42,
             suffix="sft"
         )
