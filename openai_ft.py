@@ -91,16 +91,16 @@ def create_fine_tuning_job(file_id=None):
                     },
                 },
             },
-            integrations=[
-                {
-                    "type": "wandb",
-                    "wandb": {
-                        "project": "fine_tuning",
-                        "tags": ["project:tag", "lineage"],
-                        "name": "FT-10 gpt-4o-mini 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    }
-                }
-            ],
+            # integrations=[
+            #     {
+            #         "type": "wandb",
+            #         "wandb": {
+            #             "project": "fine_tuning",
+            #             "tags": ["project:tag", "lineage"],
+            #             "name": "FT-10 gpt-4o-mini 100 " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            #         }
+            #     }
+            # ],
             seed=42,
             suffix="sft"
         )
