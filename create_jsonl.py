@@ -1,6 +1,6 @@
 import json
 
-from messages_mappings200 import vague_messages, correct_mappings
+from messages_mappings200_2 import vague_messages, correct_mappings
 
 # System prompt from openai_eval.py
 SYSTEM_PROMPT = """You are an advanced hospitality chatbot for a premium hotel chain. Your primary function is to analyze user messages and accurately identify their main intention from a predefined list of 40 possible intentions. Follow these guidelines:
@@ -76,7 +76,7 @@ LIST OF INTENTIONS:
 40. Ask for help using the chatbot"""
 
 # Create the JSONL data
-with open('tests200.jsonl', 'w') as f:
+with open('tests200_2.jsonl', 'w') as f:
     for i in range(len(vague_messages)):
         example = {
             "messages": [
@@ -87,4 +87,4 @@ with open('tests200.jsonl', 'w') as f:
         }
         f.write(json.dumps(example) + '\n')
 
-print("Created tests200.jsonl with 200 examples in the correct format.")
+print("Created tests200_2.jsonl with 200 examples in the correct format.")
