@@ -40,7 +40,7 @@ def upload_training_file():
     try:
         # Upload the data to OpenAI
         response = client.files.create(
-            file=open("tests200.jsonl", "rb"),
+            file=open("tests400.jsonl", "rb"),
             purpose="fine-tune"
         )
 
@@ -106,7 +106,7 @@ def create_fine_tuning_job(file_id=None):
             #     }
             # ],
             seed=42,
-            suffix="sft200"
+            suffix="sft400"
         )
         
         job_id = response.id
