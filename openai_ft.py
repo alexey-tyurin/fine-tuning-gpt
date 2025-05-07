@@ -231,9 +231,9 @@ def analyze_results(job_id=None):
         # Test the fine-tuned model on a few examples
         print("\nTesting fine-tuned model on examples...")
         
-        # Load test examples from tests10.jsonl
+        # Load test examples from tests200.jsonl
         try:
-            with open("tests10.jsonl", "r") as f:
+            with open("tests200.jsonl", "r") as f:
                 test_examples = [json.loads(line) for line in f]
             
             # Select a few examples for testing
