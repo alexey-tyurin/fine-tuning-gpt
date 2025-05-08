@@ -14,6 +14,22 @@ Hospitality chatbots often struggle with correctly interpreting guest requests t
 
 This project addresses this challenge by fine-tuning models to better recognize 40 different hospitality-related intents.
 
+## 🤗 VagueIntent: Hospitality Intent Classification Challenge
+
+The datasets from this project are available on HuggingFace as part of the **[VagueIntent: Hospitality Intent Classification Challenge](https://huggingface.co/collections/atyurin/vagueintent-hospitality-intent-classification-challenge-681ba6c4ac8f308d1b7f8)** collection.
+
+VagueIntent is a specialized collection designed to improve intent classification for hospitality chatbots working with ambiguous guest queries. This collection was created to help the GenAI community tackle the challenging problem of understanding guest intentions when they communicate indirectly.
+
+The collection contains two companion datasets:
+
+1. **[VagueIntent-Train](https://huggingface.co/datasets/atyurin/VagueIntent-Train)** (400 samples): AI-generated vague user prompts paired with correct intent mappings for fine-tuning language models like GPT-4o-mini. Each sample represents one of 40 distinct hospitality intents that are deliberately challenging to classify due to indirect language, euphemisms, and lack of explicit keywords. This dataset uses the `tests400.jsonl` file from this repository.
+
+2. **[VagueIntent-Eval](https://huggingface.co/datasets/atyurin/VagueIntent-Eval)** (100 samples): A separate evaluation dataset, designed specifically for benchmarking the performance improvements after fine-tuning. This dataset uses the `evals100.jsonl` file from this repository.
+
+Both datasets include challenging real-world hospitality scenarios where guests communicate their needs indirectly - from requesting late check-outs to inquiring about dietary options - without using obvious intent-signaling language. Each vague message is paired with its correct intent mapping among 40 predefined hospitality-specific intents.
+
+This collection addresses a critical gap in hospitality AI: understanding what guests want when they don't clearly state it. Ideal for researchers and developers working to improve chatbot performance in the hospitality industry.
+
 ## 💼 Benefits of this project
 
 - **Complete Fine-tuning Workflow**: Working code for synthetic data generation, fine-tuning, evaluation
@@ -139,7 +155,7 @@ Our experiments show that fine-tuned GPT-4o-mini models can achieve:
 
 ## 🙏 Acknowledgements
 
-- OpenAI for providing fine-tuning capabilities
+- OpenAI for providing fine-tuning and evaluation capabilities
 
 ## Contact Information
 
