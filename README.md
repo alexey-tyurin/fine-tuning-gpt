@@ -20,7 +20,8 @@ This project addresses this challenge by fine-tuning models to better recognize 
 - **Automated Data Generation**: Scripts to generate synthetic training data for supervised fine-tuning (SFT)
 - **Fine-tuning Optimization**: Techniques to balance accuracy and latency
 - **Large-to-Small Model Distillation**: Leverage knowledge from larger models to improve smaller ones
-- **OpenAI Evals Integration**: Structured evaluation framework to measure model performance
+- **OpenAI Fine-tuning API Integration**: Structured fine-tuning framework to improve models
+- **OpenAI Evals API Integration**: Structured evaluation framework to measure model performance
 - **Real-world Use Case**: Addresses an actual problem faced by production chatbots
 
 ## 📊 Fine-tuning Benefits vs Prompting
