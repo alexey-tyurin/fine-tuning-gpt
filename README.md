@@ -16,7 +16,7 @@ This project addresses this challenge by fine-tuning models to better recognize 
 
 ## 📋 List of 40 Hospitality-related Intents
 
-The model is trained to recognize the following 40 distinct intents that cover common guest interactions in hospitality settings:
+GPT-4o-mini was fine-tuned to recognize the following 40 distinct intents that cover common guest interactions in hospitality settings:
 
 1. **Check room availability** - Inquiries about whether rooms are available for specific dates
 2. **Make a reservation / Book a room** - Requests to secure accommodations for future stays
