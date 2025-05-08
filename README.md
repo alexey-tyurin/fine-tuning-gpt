@@ -16,7 +16,7 @@ This project addresses this challenge by fine-tuning models to better recognize 
 
 ## 🤗 VagueIntent: Hospitality Intent Classification Challenge
 
-The datasets from this project are available on HuggingFace as part of the **[VagueIntent: Hospitality Intent Classification Challenge](https://huggingface.co/collections/atyurin/vagueintent-hospitality-intent-classification-challenge-681ba6c4ac8f308d1b7f8)** collection.
+The datasets from this project are available on HuggingFace as part of the **[VagueIntent: Hospitality Intent Classification Challenge](https://huggingface.co/collections/atyurin/vagueintent-hospitality-intent-classification-challenge-681ba6c4ac8f09f308d1b7f8)** collection.
 
 VagueIntent is a specialized collection designed to improve intent classification for hospitality chatbots working with ambiguous guest queries. This collection was created to help the GenAI community tackle the challenging problem of understanding guest intentions when they communicate indirectly.
 
