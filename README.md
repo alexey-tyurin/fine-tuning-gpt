@@ -38,14 +38,17 @@ This project addresses this challenge by fine-tuning models to better recognize 
 ## 🛠️ Project Structure
 
 ```
-.
 ├── README.md                     # Project documentation
+├── create_jsonl.py               # Script to create file with test data (e.g. tests200_2.jsonl) out of mapping file to be used for SFT
+├── evals100.jsonl                # 100 ambiguous messages and their correct intents to be used with OpenAI Evals
+├── generate_4.1_lists_20.py      # Script to generate vague messages using GPT-4.1 and test them with gpt-4o-mini locally
 ├── messages_mappings100.py       # 100 ambiguous messages and their correct intents
 ├── messages_mappings200.py       # 200 ambiguous messages and their correct intents
 ├── messages_mappings200_2.py     # Additional 200 ambiguous messages for testing
 ├── openai_eval.py                # Script to run evaluations through OpenAI API
 ├── openai_ft.py                  # Script to perform supervised fine-tuning (SFT)
-├── test_intent_4o-mini_200.py    # Test script for the fine-tuned model
+├── requirements.txt              # Requirements for this project
+├── test_intent_4o-mini_200.py    # Script to generate responses with gpt-4o-mini and compare them with correct ones locally
 ```
 
 ## 🚀 Getting Started
@@ -109,7 +112,7 @@ Our experiments show that fine-tuned GPT-4o-mini models can achieve:
 1. **Data Preparation**: Create training data with ambiguous messages and correct intent mappings
 2. **Initial Fine-tuning**: Perform supervised fine-tuning using the OpenAI API
 3. **Evaluation**: Test the model against a held-out test set
-4  **Deployment**: Integrate the fine-tuned model into your chatbot
+4. **Deployment**: Integrate the fine-tuned model into your chatbot
 
 
 ## 🙏 Acknowledgements
