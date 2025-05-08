@@ -14,6 +14,53 @@ Hospitality chatbots often struggle with correctly interpreting guest requests t
 
 This project addresses this challenge by fine-tuning models to better recognize 40 different hospitality-related intents.
 
+## 📋 List of 40 Hospitality-related Intents
+
+The model is trained to recognize the following 40 distinct intents that cover common guest interactions in hospitality settings:
+
+1. **Check room availability** - Inquiries about whether rooms are available for specific dates
+2. **Make a reservation / Book a room** - Requests to secure accommodations for future stays
+3. **Modify reservation** - Changes to existing bookings (dates, room type, etc.)
+4. **Cancel reservation** - Requests to cancel an existing booking
+5. **Check reservation status** - Inquiries about the current status of a booking
+6. **Request early check-in** - Asking to check in before the standard time
+7. **Request late check-out** - Asking to check out after the standard time
+8. **Check-in online** - Completing the check-in process electronically
+9. **Check-out online** - Completing the check-out process electronically
+10. **Request luggage assistance** - Help with handling or storing baggage
+11. **Order room service** - Requesting food or beverages to be delivered to the room
+12. **Book a table at a restaurant** - Reserving seating at an on-property dining venue
+13. **Request menu or dietary information** - Inquiries about food options and accommodations
+14. **Ask for breakfast hours or availability** - Information about morning meal service
+15. **Request minibar refill** - Asking for in-room refreshment restocking
+16. **Request room cleaning** - Asking for housekeeping services
+17. **Request extra towels, toiletries, or pillows** - Additional room amenities
+18. **Report an issue in the room** - Notifying staff about problems needing attention
+19. **Request laundry service** - Garment cleaning or pressing services
+20. **Request in-room amenities** - Additional items like irons, hair dryers, etc.
+21. **Ask about local attractions or tours** - Information about nearby activities
+22. **Request a wake-up call** - Asking for a scheduled reminder call
+23. **Ask for taxi or shuttle service** - Transportation arrangements
+24. **Ask about hotel policies** - Information about rules and procedures
+25. **Request spa or gym appointment** - Booking wellness services
+26. **Ask for invoice or receipt** - Documentation of charges
+27. **Query charges on the bill** - Questions about specific billing items
+28. **Change payment method** - Updating how charges will be paid
+29. **Split bill** - Dividing charges among multiple payers
+30. **Pre-authorize payment or deposit** - Setting up payment holds
+31. **Ask for Wi-Fi access or help** - Internet connectivity assistance
+32. **Ask about facility opening hours** - When venues or services are available
+33. **Request parking information** - Vehicle storage options and procedures
+34. **Ask about pet policy** - Rules regarding animals on property
+35. **Ask about smoking policy** - Designated areas and rules for smoking
+36. **Leave a review or feedback** - Sharing opinions about the stay
+37. **Report a complaint** - Expressing dissatisfaction with services
+38. **Ask to speak to a manager** - Requesting communication with leadership
+39. **Request human support or live agent** - Asking for non-automated assistance
+40. **Ask for help using the chatbot** - Assistance with the AI interface itself
+
+These intents cover the full spectrum of guest needs during their hotel journey, from pre-arrival to post-departure.
+
 ## 🤗 VagueIntent: Hospitality Intent Classification Challenge
 
 The datasets from this project are available on HuggingFace as part of the **[VagueIntent: Hospitality Intent Classification Challenge](https://huggingface.co/collections/atyurin/vagueintent-hospitality-intent-classification-challenge-681ba6c4ac8f09f308d1b7f8)** collection.
