@@ -59,7 +59,7 @@ As shown above, fine-tuning GPT-4o-mini with just 400 examples provides a 130% i
 ```
 ├── README.md                     # Project documentation
 ├── create_jsonl.py               # Script to create file with test data (e.g. tests200_2.jsonl) out of mapping file to be used for SFT
-├── evals100.jsonl                # 100 ambiguous messages and their correct intents to be used with OpenAI Evals
+├── evals100.jsonl                # 100 ambiguous messages and their correct intents to be used with OpenAI Evals API
 ├── generate_4.1_lists_20.py      # Script to generate vague messages using GPT-4.1 and test them with gpt-4o-mini locally
 ├── messages_mappings100.py       # 100 ambiguous messages and their correct intents
 ├── messages_mappings200.py       # 200 ambiguous messages and their correct intents
@@ -68,6 +68,9 @@ As shown above, fine-tuning GPT-4o-mini with just 400 examples provides a 130% i
 ├── openai_ft.py                  # Script to perform supervised fine-tuning (SFT)
 ├── requirements.txt              # Requirements for this project
 ├── test_intent_4o-mini_200.py    # Script to generate responses with gpt-4o-mini and compare them with correct ones locally
+├── tests200.jsonl                # 200 ambiguous messages and their correct intents to be used with OpenAI fine-tuning API
+├── tests200_2.jsonl              # Another 200 ambiguous messages and their correct intents to be used with OpenAI fine-tuning API
+├── tests400.jsonl                # 400 ambiguous messages and their correct intents to be used with OpenAI fine-tuning API
 ```
 
 ## 🚀 Getting Started
