@@ -24,6 +24,24 @@ This project addresses this challenge by fine-tuning models to better recognize 
 - **OpenAI Evals API Integration**: Structured evaluation framework to measure model performance
 - **Real-world Use Case**: Addresses an actual problem faced by production chatbots
 
+## 📈 Accuracy Improvement Results
+
+Our experiments show significant accuracy improvements through fine-tuning:
+
+![Fine-tuning Accuracy Improvement](screenshots/SFT_evals_final.png)
+
+### Performance Comparison Table
+
+| Model | Accuracy on Intent Classification |
+|-------|----------------------------------|
+| GPT-3.5-turbo | 8% |
+| GPT-4o-mini (before fine-tuning) | 26% |
+| GPT-4.1 | 52% |
+| GPT-4o-mini + SFT (200 samples) | 56% |
+| GPT-4o-mini + SFT (400 samples) | 60% |
+
+As shown above, fine-tuning GPT-4o-mini with just 400 examples provides a 130% improvement over the base model and even outperforms GPT-4.1, while maintaining significantly lower cost and latency.
+
 ## 📊 Fine-tuning Benefits vs Prompting
 
 | Aspect | Fine-tuning Advantage                                     |
